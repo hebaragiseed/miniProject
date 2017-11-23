@@ -20,9 +20,9 @@ function addSecond() {
   };
 }
 //Reducer
-const TIME_DURATION = 1500
+const TIME_DURATION = 10;
 const initialstate = {
-  isPlaying: true,
+  isPlaying: false,
   elapedTime: 0,
   timerDuration: TIME_DURATION
 }
@@ -33,7 +33,7 @@ function reducer(state = initialstate, action) {
     case RESTART_TIMER:
       return applyRestartTimer(state);
     case ADD_SECOND: 
-      return applyaddSecond(state);
+      return applyAddSecond(state);
     default: 
       return state;
   }
@@ -48,7 +48,7 @@ function applyStartTimer(state) {
 function applyRestartTimer(state) {
   return {
     ...state,
-    isPlaying: faulse,
+    isPlaying: false,
     elapedTime: 0    
   }
 }
@@ -56,12 +56,13 @@ function applyAddSecond(state) {
   if(state.elapedTime < TIME_DURATION) {
     return {
       ...state,
-    elapseTime: state.elapsedTime + 1
+    elapedTime: state.elapedTime + 1
     };
   }  else {
     return {
       ...state,
-    isPlaying: false
+    isPlaying: false,
+    elapedTime: 0
     }
   }
 }
@@ -71,6 +72,6 @@ const actionCreators = {
   restartTimer,
   addSecond
 }
-//export {actionCreator};
+export {actionCreators};
 //Export Reducer
 export default reducer;
